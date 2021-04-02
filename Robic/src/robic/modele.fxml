@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="robic.Control">
+    <top>
+    	<HBox alignment="CENTER_LEFT" style="-fx-background-color: #E9E9E9;">
+        <MenuBar id="menuFichier">
+            <Menu text="Fichier">
+                <MenuItem id="btnFicOpen" onAction="#openFile" text="Ouvrir" />
+                <MenuItem id="btnFicSave" onAction="#saveFile" text="Sauver" />
+                <MenuItem id="btnFicClose" text="Fermer" />
+            </Menu>
+            <HBox.margin>
+               <Insets right="8.0" />
+            </HBox.margin>
+        </MenuBar>
+        </HBox>
+    </top>
+    <center>
+ 		<GridPane alignment="center" hgap="10" styleClass="root" vgap="10">
+    	<padding><Insets left="25.0" right="25.0" top="32.0" /></padding>
+         <GridPane minWidth="128.0" prefHeight="258.0" prefWidth="356.0" vgap="16.0">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints maxHeight="50.0" minHeight="-Infinity" prefHeight="43.6000244140625" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="178.4" minHeight="135.59998168945316" prefHeight="166.4" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="88.19997558593752" minHeight="56.80000000000001" prefHeight="68.80000000000001" vgrow="SOMETIMES" />
+           </rowConstraints>
+            <children>
+               <AnchorPane minHeight="20.0" minWidth="128.0" prefHeight="55.0" prefWidth="356.0">
+                  <children>
+                     <HBox layoutY="-5.0" prefHeight="59.0" prefWidth="361.0">
+                        <children>
+                           <VBox>
+                              <children>
+                                 <Label id="lblIP" text="Adresse IP du serveur" />
+                                 <TextField id="txtIP" prefWidth="178.0" promptText="xx.xx.xx.xx" />
+                              </children>
+                              <padding>
+                                 <Insets bottom="16.0" />
+                              </padding>
+                              <HBox.margin>
+                                 <Insets right="16.0" />
+                              </HBox.margin>
+                           </VBox>
+                           <VBox>
+                              <children>
+                                 <Label id="lblPort" text="Port (facultatif)" />
+                                 <TextField id="txtPort" prefWidth="89.0" promptText="8000" />
+                              </children>
+                              <padding>
+                                 <Insets bottom="16.0" />
+                              </padding>
+                           </VBox>
+                        </children>
+                     </HBox>
+                  </children>
+               </AnchorPane>
+               <AnchorPane minHeight="20.0" prefHeight="155.0" prefWidth="356.0" GridPane.rowIndex="1">
+                  <children>
+                     <VBox>
+                        <children>
+                           <Label id="lblScript" text="Script ROBI" />
+                  	            <TextArea id="txtScript" fx:id="txtScript" prefHeight="150.0" prefWidth="356.0" promptText="Programme ROBI" />
+                        </children>
+                     </VBox>
+                  </children>
+               </AnchorPane>
+               <AnchorPane prefHeight="48.0" prefWidth="356.0" GridPane.rowIndex="2">
+                  <children>
+         					<Button id="btnExecute" fx:id="btnExecute" mnemonicParsing="false" onAction="#btnExecute_exec" prefWidth="178.0" text="Exécuter programme ROBI">
+                        <padding>
+                           <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        </padding>
+                     </Button>
+                  </children>
+               </AnchorPane>
+            </children>
+         </GridPane>
+         <GridPane minWidth="128.0" vgap="16.0" GridPane.columnIndex="2">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints maxHeight="143.2" minHeight="132.00001831054686" prefHeight="133.6000244140625" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="169.59998168945316" minHeight="158.40000000000003" prefHeight="167.99997558593753" vgrow="SOMETIMES" />
+           </rowConstraints>
+            <children>
+               <AnchorPane minHeight="60.0" GridPane.rowIndex="1">
+                  <children>
+                     <VBox minWidth="128.0" prefHeight="158.0" prefWidth="356.0">
+                        <children>
+                           <Label id="lblResult" text="Résultat affichage" />
+                           <ImageView id="imgResult" fitHeight="132.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true" />
+                        </children>
+                     </VBox>
+                  </children>
+               </AnchorPane>
+               <AnchorPane>
+                  <children>
+                     <VBox minWidth="128.0" AnchorPane.bottomAnchor="5.0">
+                        <children>
+                           <Label id="lblLogs" text="Logs" />
+                           <TextArea id="txtLogs" fx:id="txtLogs" disable="true" editable="false" minWidth="128.0" prefHeight="120.0" prefWidth="356.0" />
+                        </children>
+                     </VBox>
+                  </children>
+               </AnchorPane>
+            </children>
+         </GridPane>
+         <Line endX="-101.60340118408203" endY="-230.72592163085938" startX="-100.80406951904297" startY="77.2374496459961" GridPane.columnIndex="1" />
+         <columnConstraints>
+            <ColumnConstraints maxWidth="605.6000122070312" minWidth="173.5999755859375" prefWidth="355.2000366210938" />
+            <ColumnConstraints />
+            <ColumnConstraints maxWidth="540.0000244140625" minWidth="10.0" prefWidth="359.1999633789062" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+	        
+
+	        
+        </GridPane>
+    </center>
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button id="btnQuit" fx:id="btnQuit" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnQuit_exec" text="Quitter" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </GridPane.margin>
+            </Button>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.valignment="BOTTOM">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="166.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../logo%20robic.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="16.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="36.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Downloads/ubo-footer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </GridPane.margin>
+            </HBox>
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>
