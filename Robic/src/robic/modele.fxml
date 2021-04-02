@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="robic.Control">
     <top>
@@ -54,7 +55,7 @@
                            <VBox>
                               <children>
                                  <Label id="lblIP" text="Adresse IP du serveur" />
-                                 <TextField id="txtIP" prefWidth="178.0" promptText="xx.xx.xx.xx" />
+                                 <TextField id="txtIP" fx:id="txtIP" onKeyTyped="#ipIsOk" prefWidth="178.0" promptText="xx.xx.xx.xx" />
                               </children>
                               <padding>
                                  <Insets bottom="16.0" />
@@ -66,7 +67,7 @@
                            <VBox>
                               <children>
                                  <Label id="lblPort" text="Port (facultatif)" />
-                                 <TextField id="txtPort" prefWidth="89.0" promptText="8000" />
+                                 <TextField id="txtPort" fx:id="txtPort" onKeyTyped="#portIsOk" prefWidth="89.0" promptText="8000" />
                               </children>
                               <padding>
                                  <Insets bottom="16.0" />
@@ -81,18 +82,27 @@
                      <VBox>
                         <children>
                            <Label id="lblScript" text="Script ROBI" />
-                  	            <TextArea id="txtScript" fx:id="txtScript" prefHeight="150.0" prefWidth="356.0" promptText="Programme ROBI" />
+                  	            <TextArea id="txtScript" fx:id="txtScript" onKeyTyped="#scriptIsOk" prefHeight="150.0" prefWidth="356.0" promptText="Programme ROBI" />
                         </children>
                      </VBox>
                   </children>
                </AnchorPane>
                <AnchorPane prefHeight="48.0" prefWidth="356.0" GridPane.rowIndex="2">
                   <children>
-         					<Button id="btnExecute" fx:id="btnExecute" mnemonicParsing="false" onAction="#btnExecute_exec" prefWidth="178.0" text="Exécuter programme ROBI">
-                        <padding>
-                           <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                        </padding>
-                     </Button>
+                     <HBox prefHeight="59.0" prefWidth="356.0">
+                        <children>
+               					<Button id="btnExecute" fx:id="btnExecute" disable="true" mnemonicParsing="false" onAction="#btnExecute_exec" prefWidth="178.0" text="Exécuter programme ROBI">
+                              <padding>
+                                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                              </padding>
+                           </Button>
+                           <Text id="txtError" fx:id="txtError" fill="#691f1f" strokeType="OUTSIDE" strokeWidth="0.0" text="\@IP invalide" wrappingWidth="160.53676414489746">
+                              <HBox.margin>
+                                 <Insets left="16.0" />
+                              </HBox.margin>
+                           </Text>
+                        </children>
+                     </HBox>
                   </children>
                </AnchorPane>
             </children>
@@ -111,7 +121,10 @@
                      <VBox minWidth="128.0" prefHeight="158.0" prefWidth="356.0">
                         <children>
                            <Label id="lblResult" text="Résultat affichage" />
-                           <ImageView id="imgResult" fitHeight="132.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true" />
+                           <ImageView id="imgResult" fx:id="imgResult" fitHeight="132.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@logo_ubo.png" />
+                              </image></ImageView>
                         </children>
                      </VBox>
                   </children>
@@ -163,7 +176,7 @@
                <children>
                   <ImageView fitHeight="32.0" fitWidth="166.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../logo%20robic.png" />
+                        <Image url="@logo_robic.png" />
                      </image>
                      <HBox.margin>
                         <Insets right="16.0" />
@@ -171,7 +184,7 @@
                   </ImageView>
                   <ImageView fitHeight="36.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../Downloads/ubo-footer.png" />
+                        <Image url="@logo_ubo.png" />
                      </image>
                   </ImageView>
                </children>
