@@ -61,46 +61,56 @@ public class Exercice3_0 {
 
 	Command getCommandFromExpr(SNode expr) {
 		//analyseur 
-		SNode identifier, action, arg1, arg2;
+		SNode  Comparator, JustDoIt, Argc, Argv;
 		expr.children().forEach(e -> System.out.print(e.contents() + " "));
 		System.out.println();
-		identifier = expr.children().get(0);
-		if(identifier.contents().compareTo("space") == 0) {
-			action = identifier = expr.children().get(1);
-			if(action.contents().compareTo("setColor") == 0) {
-				arg1 = expr.children().get(2);
+		//ici identifier prends le premier ( indice 0)  argument ,soit robi ou space
+		Comparator = expr.children().get(0);
+		//le cas de space
+		if(Comparator.contents().compareTo("space") == 0) {
+			//le variable JustDoIt prends le deuxieme argument 
+			JustDoIt = Comparator = expr.children().get(1);
+			//si JustDoIt == setColor on lit le 3eme argument ( la couleur)
+			if(JustDoIt.contents().compareTo("setColor") == 0) {
+				Argc = expr.children().get(2);
 				Color color;
 				try {
-					//pour changer la coulur de space 
-					Field field = Class.forName("java.awt.Color").getField(arg1.contents());
+					//pour changer la couleur de space 
+					Field field = Class.forName("java.awt.Color").getField(Argc.contents());
 					color = (Color)field.get(null);
 				} catch (Exception e) {
 					color = Color.white;
 				}
 				return new SpaceChangeColor(color);
-			} else if(action.contents().compareTo("sleep") == 0) {
-				arg1 = expr.children().get(2);
-				int time = Integer.valueOf(arg1.contents());
+				//si JustDoIt == a sleep on lit le 3eme argument ( la durée)
+			} else if(JustDoIt.contents().compareTo("sleep") == 0) {
+				Argc = expr.children().get(2);
+				//time prends la valeur de 3eme argument 
+				int time = Integer.valueOf(Argc.contents());
 				return new SpaceSleep(time);
 			}
-		} else if(identifier.contents().compareTo("robi") == 0) {
-			action = identifier = expr.children().get(1);
-			if(action.contents().compareTo("setColor") == 0) {
-				arg1 = expr.children().get(2);
+			//ici on fait pareil mais cette fois pour robi, le variable action prends le deuxieme argument 
+		} else if(Comparator.contents().compareTo("robi") == 0) {
+			JustDoIt = Comparator = expr.children().get(1);
+			//si JustDoIt == setColor on lit le 3 eme argument ( la couleur )
+			if(JustDoIt.contents().compareTo("setColor") == 0) {
+				Argc = expr.children().get(2);
 				Color color;
 				try {
-					Field field = Class.forName("java.awt.Color").getField(arg1.contents());
+					//pour changer la couleur de robi 
+					Field field = Class.forName("java.awt.Color").getField(Argc.contents());
 					color = (Color)field.get(null);
 				} catch (Exception e) {
 					color = Color.white;
 				}
 				return new RobiChangeColor(color);
-				
-			} else if(action.contents().compareTo("translate") == 0) {
-				arg1 = expr.children().get(2);
-				arg2 = expr.children().get(3);
-				int x = Integer.valueOf(arg1.contents());
-				int y = Integer.valueOf(arg2.contents());
+				//si le 2eme(JustDoIt) argument est : translate, on lit le 3 et 4 eme argument 
+				//le 3 et 4 eme argument sont des coordonnées, d'où quel point vers quel point
+			} else if(JustDoIt.contents().compareTo("translate") == 0) {
+				Argc = expr.children().get(2);
+				Argv = expr.children().get(3);
+				int x = Integer.valueOf(Argc.contents());
+				int y = Integer.valueOf(Argv.contents());
 				return new RobiTranslate(x, y);
 			}
 		}
