@@ -29,7 +29,7 @@ public class Exercice1_0 {
 				robi.setX(robi.getX()+1);
 				robi.setY(0);
 				/* Changement de couleur avec une couleur aléatoire */
-				//robi.setColor(new Color((int) (Math.random() * 0x1000000)));
+				robi.setColor(new Color((int) (Math.random() * 0x1000000)));
 			}
 			
 			
@@ -44,7 +44,7 @@ public class Exercice1_0 {
 				robi.setY(robi.getY()+1);
 				robi.setX(width-robi.getWidth());
 				/* Changement de couleur avec une couleur aléatoire */
-				//robi.setColor(new Color((int) (Math.random() * 0x1000000)));
+				robi.setColor(new Color((int) (Math.random() * 0x1000000)));
 			}
 			
 			//Passage du bas droit à bas gauche
@@ -55,7 +55,7 @@ public class Exercice1_0 {
 				height = space.getHeight();width = space.getWidth();
 				robi.setX(robi.getX()-1);
 				robi.setY(height-robi.getHeight());
-				//robi.setColor(new Color((int) (Math.random() * 0x1000000)));
+				robi.setColor(new Color((int) (Math.random() * 0x1000000)));
 			}
 			
 			//Passage du bas gauche à haut droit
@@ -66,15 +66,9 @@ public class Exercice1_0 {
 				height = space.getHeight();
 				robi.setY(robi.getY()-1);
 				robi.setX(0);
-				//robi.setColor(new Color((int) (Math.random() * 0x1000000)));
+				robi.setColor(new Color((int) (Math.random() * 0x1000000)));
 			}
-			 // Pour changer la couleur on peut utiliser ça 
-			Random rand = new Random();
-			robi.setColor(new Color(rand.nextInt(0xFFFFFF)));
-			//ou ça 
-			//robi.setColor(new Color((int) (Math.random() * 0x1000000)));
 			
-			// la quelle est plus simple a explique , vue que j'ai trouvé les deux solution sur StackOverFlow ? 
 		}
 		
 	}
