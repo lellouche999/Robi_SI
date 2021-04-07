@@ -22,6 +22,10 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
+import extra.Environment;
+import extra.Reference;
+import extra.TypeReference;
+import extra.command.*;
 import graphicLayer.GRect;
 import graphicLayer.GSpace;
 import stree.parser.SNode;
@@ -29,29 +33,30 @@ import stree.parser.SParser;
 import tools.Tools;
 
 public class Exercice4_1_0 {
-	// Une seule variable d'instance
+	// une seule variable d'instance 
 	Environment environment = new Environment();
 
 	public Exercice4_1_0() {
-		// space et robi sont temporaires ici
+		//ici  space et robi sont temporaire
 		GSpace space = new GSpace("Exercice 4", new Dimension(200, 100));
 		GRect robi = new GRect();
 
 		space.addElement(robi);
 		space.open();
 
-		Reference spaceRef = new Reference(space);
-		Reference robiRef = new Reference(robi);
+		Reference Ref_space = new Reference(space);
+		Reference Ref_robi = new Reference(robi);
 
-		// Initialisation des references : on leur ajoute les primitives qu'elles
-		// comprenent
-		//
-		// <A VOUS DE CODER>
-		//
+		Ref_space.addCommand("setColor", new SetColor());
+		
+		Ref_robi.addCommand("setColor", new SetColor());
+		Ref_robi.addCommand("translate", new Translate());
+		Ref_robi.addCommand("setDim", new SetDim());
 
-		// Enrigestrement des references dans l'environement par leur nom
-		environment.addReference("space", spaceRef);
-		environment.addReference("robi", robiRef);
+		// enrigestrement des references dans l'environement par nom
+		environment.addReference("space", Ref_space);
+		environment.addReference("robi", Ref_robi);
+		TypeReference.init(environment);
 
 		this.mainLoop();
 	}
