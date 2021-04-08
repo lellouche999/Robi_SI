@@ -32,26 +32,31 @@ package exercice4;
 (space add hello (label.class new "Hello world"))
 (hello translate 10 10)
 (hello setColor black)
-
 */
 
 
 import java.awt.Dimension;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.List;
 
+import graphicLayer.GElement;
 import graphicLayer.GImage;
 import graphicLayer.GOval;
 import graphicLayer.GRect;
 import graphicLayer.GSpace;
 import graphicLayer.GString;
+import extra.Environment;
+import extra.Interpreter;
+import extra.Reference;
+import extra.command.*;
 import stree.parser.SNode;
 import stree.parser.SParser;
 import tools.Tools;
 
 
-/*
+
 class NewElement implements Command {
 	public Reference run(Reference reference, SNode method) {
 		try {
@@ -69,38 +74,49 @@ class NewElement implements Command {
 		return null;
 	}
 }
-*/
+
 
 public class Exercice4_2_0 {
 	// Une seule variable d'instance
 	Environment environment = new Environment();
+	GSpace space;
 
 	public Exercice4_2_0() {
-		GSpace space = new GSpace("Exercice 4", new Dimension(200, 100));
+		space = new GSpace("Exercice 4", new Dimension(200, 100));
 		space.open();
 
 		Reference spaceRef = new Reference(space);
+		
+		/*
 		Reference rectClassRef = new Reference(GRect.class);
 		Reference ovalClassRef = new Reference(GOval.class);
 		Reference imageClassRef = new Reference(GImage.class);
 		Reference stringClassRef = new Reference(GString.class);
-
+		*/
 		spaceRef.addCommand("setColor", new SetColor());
 		spaceRef.addCommand("sleep", new Sleep());
 
 		spaceRef.addCommand("add", new AddElement());
 		spaceRef.addCommand("del", new DelElement());
 		
+		spaceRef.addCommand("info", new InfoReference());
+		spaceRef.addCommand("addScript", new AddScript());
+		
+		spaceRef.getEnvironment();
+		
+		environment.addReference("space", spaceRef);
+		
+		/*
 		rectClassRef.addCommand("new", new NewElement());
 		ovalClassRef.addCommand("new", new NewElement());
 		imageClassRef.addCommand("new", new NewImage());
 		stringClassRef.addCommand("new", new NewString());
-
-		environment.addReference("space", spaceRef);
+		
 		environment.addReference("rect.class", rectClassRef);
 		environment.addReference("oval.class", ovalClassRef);
 		environment.addReference("image.class", imageClassRef);
 		environment.addReference("label.class", stringClassRef);
+		*/
 		
 		this.mainLoop();
 	}
@@ -124,7 +140,8 @@ public class Exercice4_2_0 {
 			// execution des s-expressions compilees
 			Iterator<SNode> itor = compiled.iterator();
 			while (itor.hasNext()) {
-				new Interpreter().compute(environment, itor.next());
+				new Interpreter(System.out).compute(environment, itor.next());
+				space.repaint();
 			}
 		}
 	}
