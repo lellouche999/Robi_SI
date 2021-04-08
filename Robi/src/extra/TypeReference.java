@@ -32,10 +32,10 @@ public class TypeReference {
 	}
 	
 	public static void init(Environment e) {
-		e.addReference("rect.class", rectClassRef);
-		e.addReference("oval.class", ovalClassRef);
-		e.addReference("image.class", imageClassRef);
-		e.addReference("label.class", stringClassRef);
+		e.addReference("rect", rectClassRef);
+		e.addReference("oval", ovalClassRef);
+		e.addReference("image", imageClassRef);
+		e.addReference("string", stringClassRef);
 	}
 
 	public static void end(Environment e) {

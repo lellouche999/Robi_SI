@@ -1,21 +1,21 @@
 package exercice4;
 
-// 
-//	(space setColor black)  
-//	(robi setColor yellow) 
-//	(space sleep 2000) 
-//	(space setColor white)  
-//	(space sleep 1000) 	
-//	(robi setColor red)		  
-//	(space sleep 1000)
-//	(robi translate 100 0)
-//	(space sleep 1000)
-//	(robi translate 0 50)
-//	(space sleep 1000)
-//	(robi translate -100 0)
-//	(space sleep 1000)
-//	(robi translate 0 -40) ) 
-//
+/*
+(space setColor black)  
+(robi setColor yellow) 
+(space sleep 2000) 
+(space setColor white)  
+(space sleep 1000) 	
+(robi setColor red)		  
+(space sleep 1000)
+(robi translate 100 0)
+(space sleep 1000)
+(robi translate 0 50)
+(space sleep 1000)
+(robi translate -100 0)
+(space sleep 1000)
+(robi translate 0 -40) ) 
+*/
 
 import java.awt.Dimension;
 import java.io.IOException;

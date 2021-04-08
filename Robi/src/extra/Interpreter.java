@@ -16,24 +16,20 @@ public class Interpreter {
 		Reference exec;
 		try {
 			Reference receiver = getReceiver(environment, next);
-			ps.println(recoverCommand(next) + " => Ok");
+			ps.println(recoverCommand(next) + " -- ok");
 			exec = receiver.run(next);
-			switch(next.get(1).contents()) {
-				case "info":
-					ps.println("print:: " + exec.toString());
-					break;
-				case "print":
-					ps.println(exec.getReceiver());
-					break;
-			}
+			if(next.get(1).contents().compareTo("info") == 0)
+				ps.println(exec.toString());
 		} catch(NullPointerException e) {
 			e.printStackTrace();
-			ps.println("Erreur(NullPointerException)");
+			ps.println("### ERROR(NullPointerException) ###");
 			ps.println(recoverCommand(next));
-		} catch(OutOfBoundsException e) {
+			ps.println("### ERROR ###");
+		} catch(IndexOutOfBoundsException e) {
 			e.printStackTrace();
-			ps.println("Erreur(OutOfBoundsException)");
+			ps.println("### ERROR(IndexOutOfBoundsException) ###");
 			ps.println(recoverCommand(next));
+			ps.println("### ERROR ###");
 		}
 	}
 	

@@ -1,37 +1,17 @@
 package exercice4;
 
- /*
-	(space setColor black)  
-	(robi setColor yellow) 
-	(space sleep 2000) 
-	(space setColor white)  
-	(space sleep 1000) 	
-	(space add robi (GRect new))
-	(robi setColor green)
-	(robi translate 100 50)
-	(space del robi)
-	(robi setColor red)		  
-	(space sleep 1000)
-	(robi translate 100 0)
-	(space sleep 1000)
-	(robi translate 0 50)
-	(space sleep 1000)
-	(robi translate -100 0)
-	(space sleep 1000)
-	(robi translate 0 -40) ) 
-	
-	
-(space add robi (rect.class new))
+ /*	
+(space add robi (rect new))
 (space.robi translate 130 50)
-(space.robi setColor red)
-(space add ovl (oval.class new))
-(space.ovl setColor orange)
-(space.ovl translate 80 80)
-(space add gif (image.class new alien.gif))
-(space.gif translate 200 0)
-(space add soaig (label.class new "Hello Sckrooj19"))
-(space.soaig translate 29 29 )
-(robi.soaig setColor green)
+(space.robi setColor yellow)
+(space add momo (oval new))
+(space.momo setColor red)
+(space.momo translate 80 80)
+(space add pif (image new alien.gif))
+(space.pif translate 100 0)
+(space add hello (string new "Hello world"))
+(space.hello translate 10 10)
+(space.hello setColor black)
 */
 
 
@@ -139,13 +119,40 @@ public class Exercice4_2_0 {
 			}
 			// execution des s-expressions compilees
 			Iterator<SNode> itor = compiled.iterator();
+			SNode exec;
+			Reference receiver;
+			
 			while (itor.hasNext()) {
-				new Interpreter(System.out).compute(environment, itor.next());
-				space.repaint();
+				exec=itor.next();
+				receiver = getReceiver(environment, exec);
+				receiver.run(exec);
 			}
 		}
 	}
 
+	private Reference getReceiver(Environment environment, SNode next) {
+		String receiverName = next.get(0).contents();
+		String[] allRefNames = receiverName.split("\\.");
+		Reference receiver = environment.getReferenceByName(receiverName);
+		Environment refEnv = environment;
+		
+		for(String refName : allRefNames) {
+			receiver = refEnv.getReferenceByName(refName);
+			refEnv = receiver.getEnvironment();
+		}
+		
+		return receiver;
+	}
+
+	private void run(SNode expr) {
+		// quel est le nom du receiver
+		String receiverName = expr.get(0).contents();
+		// quel est le receiver
+		Reference receiver = environment.getReferenceByName(receiverName);
+		// demande au receiver d'executer la s-expression compilee
+		receiver.run(expr);
+	}
+	
 	public static void main(String[] args) {
 		new Exercice4_2_0();
 	}

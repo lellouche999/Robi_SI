@@ -60,4 +60,18 @@ public class Reference {
 		ret += "]\n";
 		return ret;
 	}
+	
+	public Reference getReceiver(Environment environment, SNode next) {
+		String receiverName = next.get(0).contents();
+		String[] allRefNames = receiverName.split("\\.");
+		Reference receiver = environment.getReferenceByName(receiverName);
+		Environment refEnv = environment;
+		
+		for(String refName : allRefNames) {
+			receiver = refEnv.getReferenceByName(refName);
+			refEnv = receiver.getEnvironment();
+		}
+		
+		return receiver;
+	}
 }
