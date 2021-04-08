@@ -91,7 +91,7 @@
                   <children>
                      <HBox prefHeight="59.0" prefWidth="356.0">
                         <children>
-               					<Button id="btnExecute" fx:id="btnExecute" disable="true" mnemonicParsing="false" onAction="#btnExecute_exec" prefWidth="178.0" text="Exécuter programme ROBI">
+               					<Button id="btnExecute" fx:id="btnExecute" disable="true" mnemonicParsing="false" onAction="#btnExecute_exec" prefWidth="178.0" text="ExÃ©cuter programme ROBI">
                               <padding>
                                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                               </padding>
@@ -120,7 +120,7 @@
                   <children>
                      <VBox minWidth="128.0" prefHeight="158.0" prefWidth="356.0">
                         <children>
-                           <Label id="lblResult" text="Résultat affichage" />
+                           <Label id="lblResult" text="RÃ©sultat affichage" />
                            <ImageView id="imgResult" fx:id="imgResult" fitHeight="132.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                  <Image url="@logo_ubo.png" />
@@ -134,7 +134,7 @@
                      <VBox minWidth="128.0" AnchorPane.bottomAnchor="5.0">
                         <children>
                            <Label id="lblLogs" text="Logs" />
-                           <TextArea id="txtLogs" fx:id="txtLogs" disable="true" editable="false" minWidth="128.0" prefHeight="120.0" prefWidth="356.0" />
+                           <TextArea id="txtLogs" fx:id="txtLogs" editable="false" minWidth="128.0" prefHeight="120.0" prefWidth="356.0" style="-fx-background-color: #F8F8F8;" />
                         </children>
                      </VBox>
                   </children>

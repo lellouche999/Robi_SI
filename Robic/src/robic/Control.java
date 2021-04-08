@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.regex.Pattern;
 
 import javafx.application.Platform;
@@ -23,6 +24,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.Socket;
+
 
 public class Control {
     private File fic;
@@ -43,13 +51,34 @@ public class Control {
     public void initialize() {
     }
 
-    public void btnExecute_exec(ActionEvent event) { 
-    	//TODO
+    public void btnExecute_exec(ActionEvent event) throws Exception{ 
     	System.out.println("btnExecute_exec");
-    	System.out.println("textArea1 = "+txtScript.getText());
-    	txtLogs.appendText(">> une exécution sur "+txtIP.getText()+":"+txtPort.getText()+"\n");
-    	//Image img = new Image("logo_robic.png");
-    	//imgResult.setImage(img);
+    	System.out.println(txtScript.getText());
+    	int port;
+    	if(txtPort.getText()=="") {
+    		port=8000;
+    	}else {
+    		port = Integer.decode(txtPort.getText());
+    	}
+    	Socket s = new Socket(txtIP.getText(), port);
+    	txtLogs.appendText(">> une exécution sur "+txtIP.getText()+":"+port+"\n\n");
+    	BufferedReader  br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+    	PrintStream ps = new PrintStream(s.getOutputStream());
+    	String result ="";
+    	
+    	ps.println(txtScript.getText()+"\nfin");
+    	if(txtScript.getText().equals("stop")) {
+    		txtLogs.appendText("extinction du server\n");
+    	}else {
+        	result=br.readLine();
+        	while(!result.equals("GOOD")) {
+        		txtLogs.appendText(result + " : OK\n");
+            	result=br.readLine();
+        	}
+    		
+    	}
+    	txtLogs.appendText("\n\n");
+    	s.close();
     }
     
     public void btnQuit_exec(ActionEvent event) {
