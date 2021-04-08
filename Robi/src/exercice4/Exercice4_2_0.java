@@ -22,16 +22,16 @@ package exercice4;
 	
 	
 (space add robi (rect.class new))
-(robi translate 130 50)
-(robi setColor yellow)
-(space add momo (oval.class new))
-(momo setColor red)
-(momo translate 80 80)
-(space add pif (image.class new alien.gif))
-(pif translate 100 0)
-(space add hello (label.class new "Hello world"))
-(hello translate 10 10)
-(hello setColor black)
+(space.robi translate 130 50)
+(space.robi setColor red)
+(space add ovl (oval.class new))
+(space.ovl setColor orange)
+(space.ovl translate 80 80)
+(space add gif (image.class new alien.gif))
+(space.gif translate 200 0)
+(space add soaig (label.class new "Hello Sckrooj19"))
+(space.soaig translate 29 29 )
+(robi.soaig setColor green)
 */
 
 
